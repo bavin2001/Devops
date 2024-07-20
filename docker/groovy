@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main' , url : 'https://github.com/bavin2001/webjen.git'
+            }
+        }
+        stage('Build') {
+            steps{
+                echo "building"
+                sh 'pwd'
+                sh 'ls'
+                sh 'echo asd | sudo -S docker build -t jenkinstest .'
+                sh 'echo asd | sudo -S docker images'
+            }    
+        }
+        stage('Container') {
+            steps{
+                sh 'echo asd | sudo -S docker run -d -p 9080:80 --name jenkins jenkinstest'
+            }
+        }
+    }   
+}

@@ -1,0 +1,7 @@
+FROM node
+WORKDIR /app
+RUN git clone https://github.com/SreejuZzz/novavi.git
+RUN npm install
+RUN run build
+EXPOSE 3000
+CMD ["npm","start"]
